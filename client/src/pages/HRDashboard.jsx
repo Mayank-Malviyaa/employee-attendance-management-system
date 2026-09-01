@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     LayoutDashboard,
     Users,
@@ -24,6 +25,7 @@ import { API_BASE_URL } from "../config/api";
 import "./HRDashboard.css";
 
 function HRDashboard() {
+    const navigate = useNavigate();
     const { theme, toggleTheme, resetThemeToLight } = useTheme();
 
     const [summary, setSummary] = useState({
@@ -276,6 +278,15 @@ function HRDashboard() {
                 return;
             }
 
+            const updatedStatus = action === "approve" ? "Approved" : "Rejected";
+
+            // Update UI state immediately
+            setLeaves((prevLeaves) =>
+                prevLeaves.map((l) =>
+                    String(l._id) === String(leaveId) ? { ...l, status: updatedStatus } : l
+                )
+            );
+
             setMessage(
                 action === "approve"
                     ? "Leave approved successfully"
@@ -296,7 +307,7 @@ function HRDashboard() {
         localStorage.removeItem("employee");
         localStorage.removeItem("token");
         resetThemeToLight();
-        window.location.href = "/login";
+        navigate("/login", { replace: true });
     }
 
     const scrollToSection = (sectionId) => {

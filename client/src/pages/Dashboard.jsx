@@ -285,7 +285,11 @@ function Dashboard() {
             setLeaveEndDate("");
             setLeaveReason("");
 
-            fetchLeaves();
+            if (data.leave) {
+                setLeaves((prevLeaves) => [data.leave, ...prevLeaves]);
+            }
+
+            await fetchLeaves();
 
         } catch (error) {
             console.error("Apply leave error:", error);
@@ -319,7 +323,8 @@ function Dashboard() {
 
             setMessage("Leave cancelled successfully");
             setError("");
-            fetchLeaves();
+            setLeaves((prevLeaves) => prevLeaves.filter((l) => String(l._id) !== String(leaveId)));
+            await fetchLeaves();
 
         } catch (error) {
             console.error("Cancel leave error:", error);
@@ -331,7 +336,7 @@ function Dashboard() {
         localStorage.removeItem("employee");
         localStorage.removeItem("token");
         resetThemeToLight();
-        navigate("/login");
+        navigate("/login", { replace: true });
     }
 
     function formatTime(time) {
