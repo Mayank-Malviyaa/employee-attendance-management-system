@@ -27,7 +27,8 @@ function EmployeeRoute() {
         return <Navigate to="/login" replace />;
     }
 
-    if (employee.role !== "employee") {
+    const role = (employee.role || "employee").toLowerCase();
+    if (role === "hr" || role === "admin") {
         return <Navigate to="/hr-dashboard" replace />;
     }
 
@@ -50,7 +51,8 @@ function HRRoute() {
         return <Navigate to="/login" replace />;
     }
 
-    if (employee.role !== "hr") {
+    const role = (employee.role || "employee").toLowerCase();
+    if (role !== "hr" && role !== "admin") {
         return <Navigate to="/dashboard" replace />;
     }
 

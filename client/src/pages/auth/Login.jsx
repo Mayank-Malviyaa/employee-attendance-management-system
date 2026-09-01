@@ -40,7 +40,7 @@ function Login() {
                 return;
             }
 
-            console.log("ROLE:", data.employee.role);
+            console.log("ROLE:", data.employee?.role);
             console.log("EMPLOYEE:", data.employee);
 
             // Save logged-in employee & token
@@ -51,13 +51,13 @@ function Login() {
 
             localStorage.setItem("token", data.token);
 
-            alert("Login successful!");
+            const userRole = (data.employee?.role || "employee").toLowerCase();
 
-            // Go to dashboard based on role
-            if (data.employee.role === "hr") {
-                navigate("/hr-dashboard");
+            // Navigate directly to dashboard based on role
+            if (userRole === "hr" || userRole === "admin") {
+                navigate("/hr-dashboard", { replace: true });
             } else {
-                navigate("/dashboard");
+                navigate("/dashboard", { replace: true });
             }
 
         } catch (error) {
