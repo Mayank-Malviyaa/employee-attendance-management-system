@@ -1,0 +1,222 @@
+/* =========================================
+   AUTH PAGES
+========================================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 35%),
+        #f4f7fb;
+}
+
+
+/* =========================================
+   AUTH CARD
+========================================= */
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    box-sizing: border-box;
+    padding: 38px;
+    background: #ffffff;
+    border: 1px solid #e7ebf1;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(16, 24, 40, 0.08);
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.login-card h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 26px;
+    font-weight: 750;
+    letter-spacing: -0.4px;
+}
+
+.login-subtitle {
+    margin: 5px 0 0;
+    color: #667085;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.login-card h2 {
+    margin: 32px 0 7px;
+    color: #172033;
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+}
+
+.login-description {
+    margin: 0 0 25px;
+    color: #667085;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #344054;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 0 13px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #172033;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #98a2b3;
+    opacity: 1;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #b8c0cc;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.login-card button {
+    width: 100%;
+    height: 45px;
+    margin-top: 5px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 9px;
+    background: #2563eb;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.login-card button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.18);
+}
+
+.login-card button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   REGISTER / LOGIN LINK
+========================================= */
+
+.register-text {
+    margin: 22px 0 0;
+    color: #667085;
+    font-size: 12px;
+    text-align: center;
+}
+
+.register-text a {
+    color: #2563eb;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+
+    .login-page {
+        padding: 20px 14px;
+    }
+
+    .login-card {
+        padding: 28px 22px;
+        border-radius: 15px;
+    }
+
+    .login-card h1 {
+        font-size: 23px;
+    }
+
+    .login-card h2 {
+        margin-top: 27px;
+        font-size: 21px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+    .login-card {
+        padding: 24px 18px;
+    }
+
+    .login-card h1 {
+        font-size: 21px;
+    }
+
+    .login-card h2 {
+        font-size: 19px;
+    }
+}
