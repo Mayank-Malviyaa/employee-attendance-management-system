@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Mail, Lock, LogIn, Clock } from "lucide-react";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ function Login() {
 
         try {
             const response = await fetch(
-                "http://127.0.0.1:5000/api/auth/login",
+                "http://localhost:5000/api/auth/login",
                 {
                     method: "POST",
                     headers: {
@@ -32,11 +33,10 @@ function Login() {
                 return;
             }
 
-            
             console.log("ROLE:", data.employee.role);
-console.log("EMPLOYEE:", data.employee);
+            console.log("EMPLOYEE:", data.employee);
 
-            // Save logged-in employee
+            // Save logged-in employee & token
             localStorage.setItem(
                 "employee",
                 JSON.stringify(data.employee)
@@ -64,54 +64,65 @@ console.log("EMPLOYEE:", data.employee);
 
             <div className="login-card">
 
-                <h1>Employee Attendance</h1>
-
-                <p className="login-subtitle">
-                    Management System
-                </p>
-
-                <h2>Welcome Back 👋</h2>
-
-                <p className="login-description">
-                    Login to continue to your account
-                </p>
-
-                <form onSubmit={handleLogin}>
-
-                    <div className="form-group">
-                        <label>Email</label>
-
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+                {/* SUBTLE BLUE/INDIGO GRADIENT HEADER PANEL */}
+                <div className="auth-card-banner">
+                    <div className="brand-badge-row" style={{ background: "rgba(255, 255, 255, 0.15)", borderColor: "rgba(255, 255, 255, 0.3)", color: "#FFFFFF" }}>
+                        <div className="brand-icon-pill">
+                            <Clock size={16} />
+                        </div>
+                        <span className="brand-badge-title">EMP Attendance Hub</span>
                     </div>
 
-                    <div className="form-group">
-                        <label>Password</label>
+                    <h2 className="auth-banner-title">Welcome Back 👋</h2>
+                    <p className="auth-banner-subtitle">
+                        Log in to continue to your account dashboard
+                    </p>
+                </div>
 
-                        <input
-                            type="password"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
+                {/* CLEAN FORM BODY */}
+                <div className="auth-card-body">
+                    <form className="auth-form" onSubmit={handleLogin}>
 
-                    <button type="submit">
-                        Login
-                    </button>
+                        <div className="form-group">
+                            <label>Email Address</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="email"
+                                    placeholder="name@company.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <Mail className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                </form>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <Lock className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                <p className="register-text">
-                    Don't have an account?{" "}
-                    <Link to="/register">Register</Link>
-                </p>
+                        <button type="submit" className="btn-primary">
+                            <LogIn size={18} />
+                            <span>Sign In</span>
+                        </button>
+
+                    </form>
+
+                    <p className="register-text">
+                        Don't have an account?{" "}
+                        <Link to="/register">Register here</Link>
+                    </p>
+                </div>
 
             </div>
 

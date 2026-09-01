@@ -12,9 +12,16 @@ import Dashboard from "./pages/Dashboard";
 import HRDashboard from "./pages/HRDashboard";
 
 function EmployeeRoute() {
-    const employee = JSON.parse(
-        localStorage.getItem("employee")
-    );
+    let employee = null;
+    try {
+        const stored = localStorage.getItem("employee");
+        if (stored) {
+            employee = JSON.parse(stored);
+        }
+    } catch (e) {
+        console.error("Error parsing employee from localStorage:", e);
+        employee = null;
+    }
 
     if (!employee) {
         return <Navigate to="/login" replace />;
@@ -28,9 +35,16 @@ function EmployeeRoute() {
 }
 
 function HRRoute() {
-    const employee = JSON.parse(
-        localStorage.getItem("employee")
-    );
+    let employee = null;
+    try {
+        const stored = localStorage.getItem("employee");
+        if (stored) {
+            employee = JSON.parse(stored);
+        }
+    } catch (e) {
+        console.error("Error parsing employee from localStorage:", e);
+        employee = null;
+    }
 
     if (!employee) {
         return <Navigate to="/login" replace />;

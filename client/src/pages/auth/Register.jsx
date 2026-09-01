@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { User, Mail, Lock, Building2, UserPlus, Clock } from "lucide-react";
 
 function Register() {
 
@@ -22,7 +23,7 @@ function Register() {
         try {
 
             const response = await fetch(
-                "http://127.0.0.1:5000/api/auth/register",
+                "http://localhost:5000/api/auth/register",
                 {
                     method: "POST",
                     headers: {
@@ -64,89 +65,111 @@ function Register() {
 
             <div className="login-card">
 
-                <h1>Employee Attendance</h1>
-
-                <p className="login-subtitle">
-                    Management System
-                </p>
-
-                <h2>Create Account</h2>
-
-                <p className="login-description">
-                    Register as an employee
-                </p>
-
-                <form onSubmit={handleRegister}>
-
-                    <div className="form-group">
-                        <label>Full Name</label>
-
-                        <input
-                            type="text"
-                            placeholder="Enter your full name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
+                {/* SUBTLE BLUE/INDIGO GRADIENT HEADER PANEL */}
+                <div className="auth-card-banner">
+                    <div className="brand-badge-row" style={{ background: "rgba(255, 255, 255, 0.15)", borderColor: "rgba(255, 255, 255, 0.3)", color: "#FFFFFF" }}>
+                        <div className="brand-icon-pill">
+                            <Clock size={16} />
+                        </div>
+                        <span className="brand-badge-title">EMP Attendance Hub</span>
                     </div>
 
-                    <div className="form-group">
-                        <label>Email</label>
+                    <h2 className="auth-banner-title">Create Account 🚀</h2>
+                    <p className="auth-banner-subtitle">
+                        Register as an employee to get started
+                    </p>
+                </div>
 
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
+                {/* CLEAN FORM BODY */}
+                <div className="auth-card-body">
+                    <form className="auth-form" onSubmit={handleRegister}>
 
-                    <div className="form-group">
-                        <label>Password</label>
+                        <div className="form-group">
+                            <label>Full Name</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="text"
+                                    placeholder="Enter your full name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                                <User className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                        <input
-                            type="password"
-                            placeholder="Create a password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label>Email Address</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="email"
+                                    placeholder="name@company.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <Mail className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                    <div className="form-group">
-                        <label>Confirm Password</label>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="password"
+                                    placeholder="Create a password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <Lock className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                        <input
-                            type="password"
-                            placeholder="Confirm your password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="password"
+                                    placeholder="Confirm your password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    required
+                                />
+                                <Lock className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                    <div className="form-group">
-                        <label>Department</label>
+                        <div className="form-group">
+                            <label>Department</label>
+                            <div className="input-wrapper">
+                                <select
+                                    value={department}
+                                    onChange={(e) => setDepartment(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Select department</option>
+                                    <option value="IT">IT</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Marketing">Marketing</option>
+                                </select>
+                                <Building2 className="input-icon" size={18} />
+                            </div>
+                        </div>
 
-                        <select
-                            value={department}
-                            onChange={(e) => setDepartment(e.target.value)}
-                        >
-                            <option value="">Select department</option>
-                            <option value="IT">IT</option>
-                            <option value="HR">HR</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Marketing">Marketing</option>
-                        </select>
-                    </div>
+                        <button type="submit" className="btn-primary">
+                            <UserPlus size={18} />
+                            <span>Create Account</span>
+                        </button>
 
-                    <button type="submit">
-                        Create Account
-                    </button>
+                    </form>
 
-                </form>
-
-                <p className="register-text">
-                    Already have an account?{" "}
-                    <Link to="/login">Login</Link>
-                </p>
+                    <p className="register-text">
+                        Already have an account?{" "}
+                        <Link to="/login">Login here</Link>
+                    </p>
+                </div>
 
             </div>
 
