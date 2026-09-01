@@ -20,10 +20,11 @@ import {
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import NotificationDropdown from "../components/NotificationDropdown";
+import { API_BASE_URL } from "../config/api";
 import "./HRDashboard.css";
 
 function HRDashboard() {
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme, resetThemeToLight } = useTheme();
 
     const [summary, setSummary] = useState({
         totalEmployees: 0,
@@ -83,19 +84,19 @@ function HRDashboard() {
                 leavesResponse
             ] = await Promise.all([
                 fetch(
-                    "http://localhost:5000/api/hr/summary",
+                    `${API_BASE_URL}/api/hr/summary`,
                     requestOptions
                 ),
                 fetch(
-                    "http://localhost:5000/api/hr/employees",
+                    `${API_BASE_URL}/api/hr/employees`,
                     requestOptions
                 ),
                 fetch(
-                    "http://localhost:5000/api/hr/attendance",
+                    `${API_BASE_URL}/api/hr/attendance`,
                     requestOptions
                 ),
                 fetch(
-                    "http://localhost:5000/api/hr/leaves",
+                    `${API_BASE_URL}/api/hr/leaves`,
                     requestOptions
                 )
             ]);
@@ -258,7 +259,7 @@ function HRDashboard() {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                `http://localhost:5000/api/hr/leaves/${leaveId}/${action}`,
+                `${API_BASE_URL}/api/hr/leaves/${leaveId}/${action}`,
                 {
                     method: "PUT",
                     headers: {
@@ -294,6 +295,7 @@ function HRDashboard() {
     function handleLogout() {
         localStorage.removeItem("employee");
         localStorage.removeItem("token");
+        resetThemeToLight();
         window.location.href = "/login";
     }
 

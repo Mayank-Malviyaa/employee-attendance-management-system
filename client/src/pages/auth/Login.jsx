@@ -1,19 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, LogIn, Clock } from "lucide-react";
+import { useTheme } from "../../context/ThemeContext";
+import { API_BASE_URL } from "../../config/api";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
+    const { resetThemeToLight } = useTheme();
+
+    useEffect(() => {
+        resetThemeToLight();
+    }, [resetThemeToLight]);
 
     async function handleLogin(e) {
         e.preventDefault();
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`,
                 {
                     method: "POST",
                     headers: {

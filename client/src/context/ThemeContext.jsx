@@ -18,8 +18,15 @@ export function ThemeProvider({ children }) {
         setTheme((prev) => (prev === "light" ? "dark" : "light"));
     };
 
+    const resetThemeToLight = () => {
+        setTheme("light");
+        localStorage.setItem("theme", "light");
+        document.documentElement.setAttribute("data-theme", "light");
+        document.body.className = "light";
+    };
+
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, resetThemeToLight }}>
             {children}
         </ThemeContext.Provider>
     );
@@ -30,7 +37,12 @@ export function useTheme() {
     if (!context) {
         return {
             theme: localStorage.getItem("theme") || "light",
-            toggleTheme: () => {}
+            toggleTheme: () => {},
+            resetThemeToLight: () => {
+                localStorage.setItem("theme", "light");
+                document.documentElement.setAttribute("data-theme", "light");
+                document.body.className = "light";
+            }
         };
     }
     return context;

@@ -8,9 +8,21 @@ function setDatabase(database) {
     db = database;
 }
 
+function checkDbReady(res) {
+    if (!db) {
+        res.status(503).json({
+            message: "Database connection is not ready. Please try again in a moment."
+        });
+        return false;
+    }
+    return true;
+}
+
 // CHECK IN
 router.post("/checkin", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { employeeId } = req.body;
 
         if (!employeeId) {
@@ -55,7 +67,7 @@ router.post("/checkin", verifyToken, async (req, res) => {
         console.error("Check-in error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Check-in failed due to a server error."
         });
     }
 });
@@ -63,6 +75,8 @@ router.post("/checkin", verifyToken, async (req, res) => {
 // GET TODAY'S ATTENDANCE
 router.get("/today/:employeeId", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { employeeId } = req.params;
 
         const today = new Date();
@@ -89,7 +103,7 @@ router.get("/today/:employeeId", verifyToken, async (req, res) => {
         console.error("Get attendance error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch today's attendance."
         });
     }
 });
@@ -97,6 +111,8 @@ router.get("/today/:employeeId", verifyToken, async (req, res) => {
 // CHECK OUT
 router.put("/checkout", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { employeeId } = req.body;
 
         if (!employeeId) {
@@ -139,18 +155,18 @@ router.put("/checkout", verifyToken, async (req, res) => {
         );
 
         res.json({
-    message: "Check-out successful",
-    attendance: {
-        ...attendance,
-        checkOut: today
-    }
-});
+            message: "Check-out successful",
+            attendance: {
+                ...attendance,
+                checkOut: today
+            }
+        });
 
     } catch (error) {
         console.error("Check-out error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Check-out failed due to a server error."
         });
     }
 });
@@ -158,6 +174,8 @@ router.put("/checkout", verifyToken, async (req, res) => {
 // GET ATTENDANCE HISTORY
 router.get("/history/:employeeId", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { employeeId } = req.params;
 
         const attendance = await db
@@ -178,7 +196,7 @@ router.get("/history/:employeeId", verifyToken, async (req, res) => {
         console.error("Get history error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch attendance history."
         });
     }
 });

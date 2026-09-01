@@ -9,9 +9,21 @@ function setDatabase(database) {
     db = database;
 }
 
+function checkDbReady(res) {
+    if (!db) {
+        res.status(503).json({
+            message: "Database connection is not ready. Please try again in a moment."
+        });
+        return false;
+    }
+    return true;
+}
+
 // APPLY FOR LEAVE
 router.post("/apply", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const employeeId = req.employeeId;
         const { leaveType, startDate, endDate, reason } = req.body;
 
@@ -78,7 +90,7 @@ router.post("/apply", verifyToken, async (req, res) => {
         console.error("Apply leave error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Leave application failed due to a server error."
         });
     }
 });
@@ -87,6 +99,8 @@ router.post("/apply", verifyToken, async (req, res) => {
 // GET MY LEAVES
 router.get("/my", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const employeeId = req.employeeId;
 
         const leaves = await db
@@ -107,7 +121,7 @@ router.get("/my", verifyToken, async (req, res) => {
         console.error("Get leaves error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch leave applications."
         });
     }
 });
@@ -116,6 +130,8 @@ router.get("/my", verifyToken, async (req, res) => {
 // CANCEL PENDING LEAVE
 router.delete("/:id", verifyToken, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { ObjectId } = require("mongodb");
 
         const leave = await db
@@ -144,7 +160,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
         console.error("Cancel leave error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Leave cancellation failed due to a server error."
         });
     }
 });

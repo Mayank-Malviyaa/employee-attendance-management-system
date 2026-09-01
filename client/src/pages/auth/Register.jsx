@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Building2, UserPlus, Clock } from "lucide-react";
+import { useTheme } from "../../context/ThemeContext";
+import { API_BASE_URL } from "../../config/api";
 
 function Register() {
 
@@ -11,6 +13,11 @@ function Register() {
     const [department, setDepartment] = useState("");
 
     const navigate = useNavigate();
+    const { resetThemeToLight } = useTheme();
+
+    useEffect(() => {
+        resetThemeToLight();
+    }, [resetThemeToLight]);
 
     async function handleRegister(e) {
         e.preventDefault();
@@ -23,7 +30,7 @@ function Register() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/register",
+                `${API_BASE_URL}/api/auth/register`,
                 {
                     method: "POST",
                     headers: {

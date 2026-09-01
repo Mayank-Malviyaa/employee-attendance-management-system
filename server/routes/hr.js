@@ -9,9 +9,21 @@ function setDatabase(database) {
     db = database;
 }
 
+function checkDbReady(res) {
+    if (!db) {
+        res.status(503).json({
+            message: "Database connection is not ready. Please try again in a moment."
+        });
+        return false;
+    }
+    return true;
+}
+
 // HR DASHBOARD SUMMARY
 router.get("/summary", verifyToken, verifyHR, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const today = new Date();
         const date = today.toISOString().split("T")[0];
 
@@ -42,7 +54,7 @@ router.get("/summary", verifyToken, verifyHR, async (req, res) => {
         console.error("HR summary error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch HR summary."
         });
     }
 });
@@ -51,6 +63,8 @@ router.get("/summary", verifyToken, verifyHR, async (req, res) => {
 // GET ALL EMPLOYEES
 router.get("/employees", verifyToken, verifyHR, async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const employees = await db
             .collection("employees")
             .find(
@@ -74,7 +88,7 @@ router.get("/employees", verifyToken, verifyHR, async (req, res) => {
         console.error("Get employees error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch employee list."
         });
     }
 });
@@ -83,6 +97,8 @@ router.get("/employees", verifyToken, verifyHR, async (req, res) => {
 // GET ALL ATTENDANCE
 router.get("/attendance", async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const attendance = await db
             .collection("attendance")
             .find({})
@@ -99,7 +115,7 @@ router.get("/attendance", async (req, res) => {
         console.error("Get HR attendance error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch workforce attendance."
         });
     }
 });
@@ -108,6 +124,8 @@ router.get("/attendance", async (req, res) => {
 // GET ALL LEAVES
 router.get("/leaves", async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const leaves = await db
             .collection("leaves")
             .find({})
@@ -124,7 +142,7 @@ router.get("/leaves", async (req, res) => {
         console.error("Get HR leaves error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Failed to fetch workforce leave applications."
         });
     }
 });
@@ -133,6 +151,8 @@ router.get("/leaves", async (req, res) => {
 // APPROVE LEAVE
 router.put("/leaves/:id/approve", async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { ObjectId } = require("mongodb");
 
         const result = await db
@@ -164,7 +184,7 @@ router.put("/leaves/:id/approve", async (req, res) => {
         console.error("Approve leave error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Approve leave action failed."
         });
     }
 });
@@ -173,6 +193,8 @@ router.put("/leaves/:id/approve", async (req, res) => {
 // REJECT LEAVE
 router.put("/leaves/:id/reject", async (req, res) => {
     try {
+        if (!checkDbReady(res)) return;
+
         const { ObjectId } = require("mongodb");
 
         const result = await db
@@ -204,7 +226,7 @@ router.put("/leaves/:id/reject", async (req, res) => {
         console.error("Reject leave error:", error);
 
         res.status(500).json({
-            message: "Server error"
+            message: error.message || "Reject leave action failed."
         });
     }
 });

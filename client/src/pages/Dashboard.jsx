@@ -22,11 +22,12 @@ import {
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import NotificationDropdown from "../components/NotificationDropdown";
+import { API_BASE_URL } from "../config/api";
 import "./Dashboard.css";
 
 function Dashboard() {
     const navigate = useNavigate();
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme, resetThemeToLight } = useTheme();
 
     const [employee, setEmployee] = useState(null);
     const [checkIn, setCheckIn] = useState(null);
@@ -107,7 +108,7 @@ function Dashboard() {
     async function fetchTodayAttendance(employeeId) {
         try {
             const response = await fetch(
-                `http://localhost:5000/api/attendance/today/${employeeId}`,
+                `${API_BASE_URL}/api/attendance/today/${employeeId}`,
                 {
                     headers: getAuthHeaders()
                 }
@@ -129,7 +130,7 @@ function Dashboard() {
     async function fetchAttendanceHistory(employeeId) {
         try {
             const response = await fetch(
-                `http://localhost:5000/api/attendance/history/${employeeId}`,
+                `${API_BASE_URL}/api/attendance/history/${employeeId}`,
                 {
                     headers: getAuthHeaders()
                 }
@@ -152,7 +153,7 @@ function Dashboard() {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/attendance/checkin",
+                `${API_BASE_URL}/api/attendance/checkin`,
                 {
                     method: "POST",
                     headers: getAuthHeaders(),
@@ -193,7 +194,7 @@ function Dashboard() {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/attendance/checkout",
+                `${API_BASE_URL}/api/attendance/checkout`,
                 {
                     method: "PUT",
                     headers: getAuthHeaders(),
@@ -227,7 +228,7 @@ function Dashboard() {
     async function fetchLeaves() {
         try {
             const response = await fetch(
-                "http://localhost:5000/api/leave/my",
+                `${API_BASE_URL}/api/leave/my`,
                 {
                     headers: getAuthHeaders()
                 }
@@ -258,7 +259,7 @@ function Dashboard() {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/leave/apply",
+                `${API_BASE_URL}/api/leave/apply`,
                 {
                     method: "POST",
                     headers: getAuthHeaders(),
@@ -301,7 +302,7 @@ function Dashboard() {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/leave/${leaveId}`,
+                `${API_BASE_URL}/api/leave/${leaveId}`,
                 {
                     method: "DELETE",
                     headers: getAuthHeaders()
@@ -329,6 +330,7 @@ function Dashboard() {
     function handleLogout() {
         localStorage.removeItem("employee");
         localStorage.removeItem("token");
+        resetThemeToLight();
         navigate("/login");
     }
 
