@@ -18,6 +18,7 @@
     overflow: hidden;
     animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     transition: var(--transition-theme);
+    box-sizing: border-box;
 }
 
 @keyframes dropdownFadeIn {
@@ -209,7 +210,13 @@
 
 @media (max-width: 640px) {
     .notification-dropdown-menu {
-        right: -40px;
-        width: 300px;
+        position: fixed;
+        top: calc(var(--navbar-height) + 6px);
+        left: 12px;
+        right: 12px;
+        width: auto;
+        max-width: calc(100vw - 24px);
+        max-height: 75vh;
+        box-shadow: var(--shadow-lg);
     }
 }

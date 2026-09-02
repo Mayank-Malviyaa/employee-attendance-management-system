@@ -18,6 +18,7 @@
     gap: 12px;
     box-shadow: var(--shadow-sm);
     transition: var(--transition-theme), transform 0.15s ease;
+    box-sizing: border-box;
 }
 
 .hr-kpi-card:hover {
@@ -85,6 +86,7 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-subtle);
     transition: var(--transition-theme);
+    box-sizing: border-box;
 }
 
 .filter-input-group {
@@ -109,6 +111,7 @@
     font-size: 13px;
     outline: none;
     transition: all 0.15s ease;
+    box-sizing: border-box;
 }
 
 .filter-input-group input:focus {
@@ -189,5 +192,25 @@
     .filter-toolbar {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+    .hr-kpi-grid {
+        gap: 12px;
+    }
+    .hr-kpi-card {
+        padding: 16px;
+    }
+    .filter-toolbar {
+        padding: 14px;
+        gap: 12px;
+    }
+    .filter-input-group input, .btn-clear-filter {
+        width: 100%;
+    }
+    .action-buttons-group {
+        flex-wrap: wrap;
+        gap: 6px;
     }
 }

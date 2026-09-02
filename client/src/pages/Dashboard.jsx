@@ -528,6 +528,14 @@ function Dashboard() {
     return (
         <div className="app-container">
 
+            {/* MOBILE SIDEBAR BACKDROP OVERLAY */}
+            {mobileSidebarOpen && (
+                <div
+                    className="sidebar-overlay"
+                    onClick={() => setMobileSidebarOpen(false)}
+                />
+            )}
+
             {/* LEFT SIDEBAR (250px wide) */}
             <aside className={`app-sidebar ${mobileSidebarOpen ? "open" : ""}`}>
                 
