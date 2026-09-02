@@ -736,23 +736,28 @@
 @media (max-width: 640px) {
     .top-navbar {
         padding: 0 12px;
-        gap: 8px;
+        gap: 6px;
+        max-width: 100vw;
+        box-sizing: border-box;
     }
 
     .navbar-left {
-        gap: 8px;
+        gap: 6px;
+        flex: 1;
+        min-width: 0;
     }
 
     .page-heading-title {
-        font-size: 14px;
+        font-size: 13.5px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        max-width: 130px;
+        max-width: 120px;
     }
 
     .navbar-right {
         gap: 6px;
+        flex-shrink: 0;
     }
 
     .navbar-search {
@@ -771,6 +776,37 @@
 
     .sidebar-logout-btn span {
         display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .top-navbar {
+        padding: 0 8px;
+        gap: 4px;
+    }
+
+    .navbar-left {
+        gap: 4px;
+    }
+
+    .page-heading-title {
+        font-size: 12.5px;
+        max-width: 95px;
+    }
+
+    .navbar-right {
+        gap: 4px;
+    }
+
+    .navbar-icon-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .header-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
     }
 }
 
