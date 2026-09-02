@@ -298,6 +298,9 @@
     box-shadow: var(--shadow-sm);
     transition: var(--transition-theme);
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .card-header-bar {
@@ -346,6 +349,7 @@
     border: 1px solid var(--border-color);
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
 }
 
 .custom-table {
@@ -392,8 +396,11 @@
 /* LEAVE SECTION */
 .leave-grid-layout {
     display: grid;
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 340px minmax(0, 1fr);
     gap: 28px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .leave-form-card {
@@ -406,11 +413,21 @@
     gap: 16px;
     transition: var(--transition-theme);
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .leave-form-card h3 {
     font-size: 16px;
     font-weight: 800;
+}
+
+.leave-table-container {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .btn-cancel-leave {

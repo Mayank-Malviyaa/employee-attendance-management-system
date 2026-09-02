@@ -961,7 +961,7 @@ function Dashboard() {
                             </form>
 
                             {/* LEAVE REQUESTS TABLE */}
-                            <div>
+                            <div className="leave-table-container">
                                 <div className="card-header-bar" style={{ marginBottom: "16px" }}>
                                     <h3>My Leave Applications</h3>
                                     <span className="count-pill">{filteredLeaves.length} Requests</span>
