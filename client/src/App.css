@@ -402,7 +402,7 @@
     white-space: nowrap;
 }
 
-/* CLEAN CENTERED AUTH PAGES WITH GRADIENT BANNER PANEL */
+/* MODERN ELEGANT ABSTRACT BACKGROUND & AMBIENT GLOW FOR LOGIN PAGE */
 .login-page {
     min-height: 100vh;
     width: 100%;
@@ -410,12 +410,127 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 40%),
-                var(--bg-primary);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(221, 214, 254, 0.65) 0%, transparent 45%),
+        radial-gradient(circle at 88% 15%, rgba(254, 215, 226, 0.55) 0%, transparent 40%),
+        radial-gradient(circle at 80% 82%, rgba(237, 233, 254, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 18% 85%, rgba(255, 237, 213, 0.45) 0%, transparent 45%),
+        linear-gradient(135deg, #F8F7FF 0%, #F3F0FF 45%, #FAF5FF 100%);
     padding: 24px;
+    position: relative;
+    overflow: hidden;
     transition: var(--transition-theme);
     box-sizing: border-box;
+}
+
+[data-theme="dark"] .login-page, body.dark .login-page {
+    background:
+        radial-gradient(circle at 12% 18%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 88% 15%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 82%, rgba(79, 70, 229, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #0B1120 0%, #111827 50%, #0F172A 100%);
+}
+
+.login-bg-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.bg-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.bg-dots {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background-image: radial-gradient(rgba(124, 58, 237, 0.22) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.bg-dots-top-left {
+    top: 40px;
+    left: 40px;
+}
+
+.bg-dots-bottom-right {
+    bottom: 40px;
+    right: 40px;
+}
+
+[data-theme="dark"] .bg-dots, body.dark .bg-dots {
+    background-image: radial-gradient(rgba(168, 85, 247, 0.3) 1.5px, transparent 1.5px);
+}
+
+.floating-accent {
+    position: absolute;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    color: #6366F1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.08);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+    animation: floatSmooth 6s ease-in-out infinite alternate;
+}
+
+[data-theme="dark"] .floating-accent, body.dark .floating-accent {
+    background: rgba(30, 41, 59, 0.65);
+    border-color: rgba(168, 85, 247, 0.3);
+    color: #A855F7;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.accent-1 { top: 14%; left: 12%; width: 44px; height: 44px; animation-delay: 0s; }
+.accent-2 { top: 22%; right: 14%; width: 48px; height: 48px; animation-delay: 1.2s; }
+.accent-3 { bottom: 18%; left: 15%; width: 44px; height: 44px; animation-delay: 2.4s; }
+.accent-4 { bottom: 25%; right: 12%; width: 46px; height: 46px; animation-delay: 3.6s; }
+.accent-5 { top: 65%; left: 8%; width: 40px; height: 40px; animation-delay: 4.8s; }
+
+@keyframes floatSmooth {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+    100% { transform: translateY(4px) rotate(-2deg); }
+}
+
+.login-card-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.login-card-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 108%;
+    height: 108%;
+    border-radius: 32px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, rgba(79, 70, 229, 0.12) 50%, transparent 75%);
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .login-card {
@@ -611,6 +726,11 @@
     .navbar-search input {
         width: 150px;
     }
+}
+
+@media (max-width: 768px) {
+    .bg-dots { display: none; }
+    .floating-accent { display: none; }
 }
 
 @media (max-width: 640px) {
