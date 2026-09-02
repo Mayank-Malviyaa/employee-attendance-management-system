@@ -179,6 +179,15 @@
     transform: translateY(-1px);
 }
 
+.custom-table td.reason-cell {
+    max-width: 240px;
+    min-width: 140px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
 .btn-approve:disabled, .btn-reject:disabled {
     opacity: 0.5;
     cursor: not-allowed;

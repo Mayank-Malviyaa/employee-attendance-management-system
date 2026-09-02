@@ -33,7 +33,7 @@ function Dashboard() {
     const [checkIn, setCheckIn] = useState(null);
     const [checkOut, setCheckOut] = useState(null);
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [actionLoading, setActionLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
@@ -515,16 +515,6 @@ function Dashboard() {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="app-container">
-                <div className="dashboard-loading">
-                    Loading Employee Dashboard...
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="app-container">
 
@@ -992,7 +982,7 @@ function Dashboard() {
                                                         <td>{formatDate(leave.startDate)}</td>
                                                         <td>{formatDate(leave.endDate)}</td>
                                                         <td>{leave.days}</td>
-                                                        <td>{leave.reason}</td>
+                                                        <td className="reason-cell">{leave.reason}</td>
                                                         <td>
                                                             <span className={`status-badge leave-${leave.status.toLowerCase()}`}>
                                                                 {leave.status}

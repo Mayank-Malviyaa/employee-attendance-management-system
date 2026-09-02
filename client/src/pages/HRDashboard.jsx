@@ -37,7 +37,7 @@ function HRDashboard() {
     const [employees, setEmployees] = useState([]);
     const [attendance, setAttendance] = useState([]);
     const [leaves, setLeaves] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [actionLoading, setActionLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
@@ -318,16 +318,6 @@ function HRDashboard() {
             element.scrollIntoView({ behavior: "smooth" });
         }
     };
-
-    if (loading) {
-        return (
-            <div className="app-container">
-                <div className="dashboard-loading">
-                    Loading HR Administration Portal...
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="app-container">
@@ -736,7 +726,7 @@ function HRDashboard() {
                                                 <td>{formatDate(leave.startDate)}</td>
                                                 <td>{formatDate(leave.endDate)}</td>
                                                 <td>{leave.days}</td>
-                                                <td>{leave.reason}</td>
+                                                <td className="reason-cell">{leave.reason}</td>
                                                 <td>
                                                     <span className={`hr-status ${leave.status.toLowerCase()}`}>
                                                         {leave.status}

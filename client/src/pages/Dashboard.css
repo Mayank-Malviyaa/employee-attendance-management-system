@@ -418,6 +418,17 @@
     min-width: 0;
 }
 
+.leave-form-card textarea,
+.form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 80px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
 .leave-form-card h3 {
     font-size: 16px;
     font-weight: 800;
@@ -428,6 +439,15 @@
     max-width: 100%;
     width: 100%;
     box-sizing: border-box;
+}
+
+.custom-table td.reason-cell {
+    max-width: 240px;
+    min-width: 140px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.4;
 }
 
 .btn-cancel-leave {
